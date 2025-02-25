@@ -30,9 +30,10 @@ export const Square: React.FC<SquareProps> = ({ squareState }) => {
     }
 
     return (
-        <div className="flex aspect-square w-full">
+        <div className="flex aspect-square w-1/3">
             {squareState != SquareState.Open && (
                 <img
+                    className="flex p-2"
                     src={GetSquareImage(squareState)}
                     alt={GetSquareAlt(squareState)}
                 />

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { SquareState } from "~/board/SquareState";
-import { Square } from "~/board/square";
+import { Square } from "~/board/Square";
 
 export const Board: React.FC = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -10,10 +10,10 @@ export const Board: React.FC = () => {
         [SquareState.Open, SquareState.Open, SquareState.Open],
     ]);
     return (
-        <div className="flex h-screen justify-center">
-            <div className="flex h-full w-fit flex-col divide-y-4 divide-black dark:divide-neutral-400">
+        <div className="flex aspect-square h-full items-center justify-center">
+            <div className="flex h-fit w-fit flex-col divide-y-4 divide-black dark:divide-neutral-400">
                 {board.map((row) => (
-                    <div className="flex h-1/3 w-full flex-row justify-center divide-x-4 divide-black dark:divide-neutral-400">
+                    <div className="gr flex flex-row justify-center divide-x-4 divide-black dark:divide-neutral-400">
                         {row.map((square) => (
                             <Square squareState={square}></Square>
                         ))}
