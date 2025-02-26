@@ -5,9 +5,16 @@ import { Square } from "~/board/Square";
 type BoardProps = {
     player0Flag: boolean;
     swapPlayer: () => void;
+    active: boolean;
+    setActiveBoard: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export const Board: React.FC<BoardProps> = ({ player0Flag, swapPlayer }) => {
+export const Board: React.FC<BoardProps> = ({
+    player0Flag,
+    swapPlayer,
+    active,
+    setActiveBoard,
+}) => {
     const [board, setBoard] = useState<SquareState[][]>([
         [SquareState.Open, SquareState.Open, SquareState.Open],
         [SquareState.Open, SquareState.Open, SquareState.Open],
@@ -30,6 +37,7 @@ export const Board: React.FC<BoardProps> = ({ player0Flag, swapPlayer }) => {
             ),
         );
         setBoard(nextBoard);
+        setActiveBoard(rowCord * 3 + colCord);
         swapPlayer();
     }
 
@@ -44,6 +52,7 @@ export const Board: React.FC<BoardProps> = ({ player0Flag, swapPlayer }) => {
                         {row.map((square, j) => (
                             <Square
                                 key={"square " + (i * 3 + j)}
+                                active={active}
                                 squareState={square}
                                 onClick={() =>
                                     boardChangeHelper(

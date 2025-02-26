@@ -4,10 +4,15 @@ import { SquareState } from "./SquareState";
 
 type SquareProps = {
     squareState: SquareState;
+    active: boolean;
     onClick: React.MouseEventHandler;
 };
 
-export const Square: React.FC<SquareProps> = ({ squareState, onClick }) => {
+export const Square: React.FC<SquareProps> = ({
+    squareState,
+    active,
+    onClick,
+}) => {
     function GetSquareImage(squareState: SquareState): string {
         switch (squareState) {
             case SquareState.Open:
@@ -34,9 +39,13 @@ export const Square: React.FC<SquareProps> = ({ squareState, onClick }) => {
         <button
             className={
                 "flex aspect-square w-full items-center justify-center" +
-                (squareState == SquareState.Open ? " cursor-pointer" : "")
+                (active && squareState == SquareState.Open
+                    ? " cursor-pointer"
+                    : "")
             }
-            onClick={squareState != SquareState.Open ? () => {} : onClick}
+            onClick={
+                active && squareState == SquareState.Open ? onClick : () => {}
+            }
         >
             <img
                 className={`aspect-square h-3/4 w-3/4 ${squareState === SquareState.Open ? "invisible" : ""}`}
