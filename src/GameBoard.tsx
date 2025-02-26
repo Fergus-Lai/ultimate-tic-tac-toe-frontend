@@ -2,13 +2,17 @@ import { Board } from "./board/Board";
 
 export const GameBoard: React.FC = () => {
     return (
-        <div className="flex h-screen max-h-screen justify-center">
-            <div className="flex h-full w-fit flex-col items-center justify-center divide-y-4 divide-black dark:divide-neutral-400">
-                {[...Array(3)].map(() => (
-                    <div className="flex min-h-0 w-fit grow flex-row items-center justify-center divide-x-4 divide-black dark:divide-neutral-400">
-                        {[...Array(3)].map(() => (
-                            <Board />
-                        ))}
+        <div className="flex h-screen max-h-screen w-full items-center justify-center p-4">
+            <div className="grid max-w-screen-lg grid-cols-3 grid-rows-3 p-8">
+                {[...Array(9)].map((_, i) => (
+                    <div
+                        className={
+                            "flex flex-1/3" +
+                            (i % 3 !== 2 ? " border-r-4" : "") +
+                            (i <= 5 ? " border-b-4" : "")
+                        }
+                    >
+                        <Board key={i} />
                     </div>
                 ))}
             </div>
