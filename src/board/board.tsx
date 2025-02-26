@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SquareState } from "~/board/SquareState";
+import { SquareState, BoardStatus } from "~/board/enums.ts";
 import { Square } from "~/board/Square";
 
 type BoardProps = {
@@ -7,6 +7,7 @@ type BoardProps = {
     swapPlayer: () => void;
     active: boolean;
     setActiveBoard: React.Dispatch<React.SetStateAction<number>>;
+    setBoardStatus: (boardStatus: BoardStatus) => void;
 };
 
 export const Board: React.FC<BoardProps> = ({
@@ -14,6 +15,7 @@ export const Board: React.FC<BoardProps> = ({
     swapPlayer,
     active,
     setActiveBoard,
+    setBoardStatus,
 }) => {
     const [board, setBoard] = useState<SquareState[][]>([
         [SquareState.Open, SquareState.Open, SquareState.Open],

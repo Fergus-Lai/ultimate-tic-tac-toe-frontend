@@ -1,6 +1,6 @@
 import o from "~/assets/o.svg";
 import x from "~/assets/x.svg";
-import { SquareState } from "./SquareState";
+import { SquareState } from "./enums.ts";
 
 type SquareProps = {
     squareState: SquareState;
@@ -13,10 +13,10 @@ export const Square: React.FC<SquareProps> = ({
     active,
     onClick,
 }) => {
-    function GetSquareImage(squareState: SquareState): string {
+    function GetSquareImage(squareState: SquareState): string | undefined {
         switch (squareState) {
             case SquareState.Open:
-                return "";
+                return undefined;
             case SquareState.Player0:
                 return o;
             case SquareState.Player1:
