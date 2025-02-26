@@ -24,7 +24,7 @@ export const Board: React.FC = () => {
 
     return (
         <div className="flex aspect-square h-full max-h-full w-full items-center justify-center p-8">
-            <div className="flex h-full max-h-full w-full max-w-full flex-col divide-y-4 divide-black dark:divide-neutral-400">
+            <div className="flex h-full max-h-full w-full max-w-full flex-col divide-y-4 divide-black dark:divide-neutral-300">
                 {board.map((row, i) => (
                     <div
                         key={"row " + i}
