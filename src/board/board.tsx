@@ -1,16 +1,18 @@
 import { useState } from "react";
-import { SquareState, BoardStatus } from "~/board/enums.ts";
+import { SquareState, BoardStatus, WINNING_COMBINATIONS } from "~/board/const";
 import { Square } from "~/board/Square";
 
 type BoardProps = {
+    cord: number;
     player0Flag: boolean;
     swapPlayer: () => void;
     active: boolean;
-    setActiveBoard: React.Dispatch<React.SetStateAction<number>>;
+    setActiveBoard: (i: number) => void;
     setBoardStatus: (boardStatus: BoardStatus) => void;
 };
 
 export const Board: React.FC<BoardProps> = ({
+    cord,
     player0Flag,
     swapPlayer,
     active,
@@ -22,6 +24,31 @@ export const Board: React.FC<BoardProps> = ({
         [SquareState.Open, SquareState.Open, SquareState.Open],
         [SquareState.Open, SquareState.Open, SquareState.Open],
     ]);
+
+    function boardStatusCheck(board: SquareState[][]) {
+        // Check if board is won
+        const player0 = new Set();
+        const player1 = new Set();
+        for (const [index, squareStatus] of board.flat().entries()) {
+            if (squareStatus == SquareState.Player0) player0.add(index);
+            if (squareStatus == SquareState.Player1) player1.add(index);
+        }
+        for (const combination of WINNING_COMBINATIONS) {
+            if (combination.isSubsetOf(player0)) {
+                setBoardStatus(BoardStatus.Player0);
+                return true;
+            }
+            if (combination.isSubsetOf(player1)) {
+                setBoardStatus(BoardStatus.Player1);
+                return true;
+            }
+        }
+        if (player0.size + player1.size == 9) {
+            setBoardStatus(BoardStatus.Draw);
+            return true;
+        }
+        return false;
+    }
 
     function boardChangeHelper(
         rowCord: number,
@@ -39,7 +66,9 @@ export const Board: React.FC<BoardProps> = ({
             ),
         );
         setBoard(nextBoard);
-        setActiveBoard(rowCord * 3 + colCord);
+        const currentBoardStatus = boardStatusCheck(nextBoard);
+        const nextCord = rowCord * 3 + colCord;
+        setActiveBoard(nextCord == cord && currentBoardStatus ? -1 : nextCord);
         swapPlayer();
     }
 

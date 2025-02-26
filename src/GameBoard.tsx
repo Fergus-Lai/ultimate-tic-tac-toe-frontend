@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Board } from "./board/Board";
-import { BoardStatus } from "./board/enums";
+import { BoardStatus } from "./board/const";
 
 export const GameBoard: React.FC = () => {
     const [player0Flag, setPlayer0Flag] = useState(true);
@@ -8,6 +8,10 @@ export const GameBoard: React.FC = () => {
     const [boardsStatus, setBoardsStatus] = useState<Map<number, BoardStatus>>(
         new Map(),
     );
+
+    const setActiveBoardHelper = (i: number) => {
+        setActiveBoard(i == -1 || boardsStatus.has(i) ? -1 : i);
+    };
 
     const boardBgGetter = (i: number) => {
         switch (boardsStatus.get(i)) {
@@ -39,10 +43,14 @@ export const GameBoard: React.FC = () => {
                     >
                         <Board
                             key={i}
+                            cord={i}
                             swapPlayer={swapPlayer}
                             player0Flag={player0Flag}
-                            active={activeBoard == i || activeBoard == -1}
-                            setActiveBoard={setActiveBoard}
+                            active={
+                                !boardsStatus.has(i) &&
+                                (activeBoard == i || activeBoard == -1)
+                            }
+                            setActiveBoard={setActiveBoardHelper}
                             setBoardStatus={(newStatus: BoardStatus) =>
                                 setBoardsStatus((prevBoardsStatus) =>
                                     new Map(prevBoardsStatus).set(i, newStatus),

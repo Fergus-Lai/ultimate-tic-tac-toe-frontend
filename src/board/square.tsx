@@ -1,6 +1,6 @@
 import o from "~/assets/o.svg";
 import x from "~/assets/x.svg";
-import { SquareState } from "./enums.ts";
+import { SquareState } from "./const.ts";
 
 type SquareProps = {
     squareState: SquareState;
