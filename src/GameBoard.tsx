@@ -24,7 +24,7 @@ export const GameBoard: React.FC = () => {
                             key={i}
                             swapPlayer={swapPlayer}
                             player0Flag={player0Flag}
-                            active={activeBoard == i}
+                            active={activeBoard == i || activeBoard == -1}
                             setActiveBoard={setActiveBoard}
                         />
                     </div>
