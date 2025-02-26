@@ -2,9 +2,14 @@ import { useState } from "react";
 import { SquareState } from "~/board/SquareState";
 import { Square } from "~/board/Square";
 
-export const Board: React.FC = () => {
+type BoardProps = {
+    player0Flag: boolean;
+    swapPlayer: () => void;
+};
+
+export const Board: React.FC<BoardProps> = ({ player0Flag, swapPlayer }) => {
     const [board, setBoard] = useState<SquareState[][]>([
-        [SquareState.Player0, SquareState.Open, SquareState.Open],
+        [SquareState.Open, SquareState.Open, SquareState.Open],
         [SquareState.Open, SquareState.Open, SquareState.Open],
         [SquareState.Open, SquareState.Open, SquareState.Open],
     ]);
@@ -12,14 +17,20 @@ export const Board: React.FC = () => {
     function boardChangeHelper(
         rowCord: number,
         colCord: number,
-        player: SquareState.Player0 | SquareState.Player1,
+        player0Flag: boolean,
+        swapPlayer: () => void,
     ) {
         const nextBoard = board.map((row, i) =>
             row.map((square, j) =>
-                i == rowCord && j == colCord ? player : square,
+                i == rowCord && j == colCord
+                    ? player0Flag
+                        ? SquareState.Player0
+                        : SquareState.Player1
+                    : square,
             ),
         );
         setBoard(nextBoard);
+        swapPlayer();
     }
 
     return (
@@ -28,14 +39,19 @@ export const Board: React.FC = () => {
                 {board.map((row, i) => (
                     <div
                         key={"row " + i}
-                        className="flex flex-row justify-center divide-x-4 divide-black dark:divide-neutral-400"
+                        className="flex w-full flex-row justify-center divide-x-4 divide-black dark:divide-neutral-400"
                     >
                         {row.map((square, j) => (
                             <Square
                                 key={"square " + (i * 3 + j)}
                                 squareState={square}
                                 onClick={() =>
-                                    boardChangeHelper(i, j, SquareState.Player0)
+                                    boardChangeHelper(
+                                        i,
+                                        j,
+                                        player0Flag,
+                                        swapPlayer,
+                                    )
                                 }
                             />
                         ))}

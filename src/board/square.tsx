@@ -38,13 +38,11 @@ export const Square: React.FC<SquareProps> = ({ squareState, onClick }) => {
             }
             onClick={squareState != SquareState.Open ? () => {} : onClick}
         >
-            {squareState != SquareState.Open && (
-                <img
-                    className="h-3/4 w-3/4"
-                    src={GetSquareImage(squareState)}
-                    alt={GetSquareAlt(squareState)}
-                />
-            )}
+            <img
+                className={`aspect-square h-3/4 w-3/4 ${squareState === SquareState.Open ? "invisible" : ""}`}
+                src={GetSquareImage(squareState)}
+                alt={GetSquareAlt(squareState)}
+            />
         </button>
     );
 };
