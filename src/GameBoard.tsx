@@ -61,9 +61,9 @@ export const GameBoard: React.FC = () => {
     const boardBgGetter = (i: number) => {
         switch (boardsStatus.get(i)) {
             case BoardStatus.Player0:
-                return " bg-red-900";
+                return " bg-red-300 dark:bg-red-900";
             case BoardStatus.Player1:
-                return " bg-blue-900";
+                return " bg-indigo-300 dark:bg-indigo-900";
             default:
                 return "";
         }
@@ -84,7 +84,9 @@ export const GameBoard: React.FC = () => {
                                     "flex w-full border-black opacity-70 dark:border-neutral-500" +
                                     (i % 3 !== 2 ? " border-r-4" : "") +
                                     (i <= 5 ? " border-b-4" : "") +
-                                    (activeBoard == i ? " bg-green-950" : "") +
+                                    (activeBoard == i
+                                        ? " bg-green-300 dark:bg-green-950"
+                                        : "") +
                                     boardBgGetter(i)
                                 }
                             >
