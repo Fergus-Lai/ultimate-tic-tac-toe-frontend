@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router";
 import { Board } from "~/board/Board";
 import { BoardStatus, WINNING_COMBINATIONS } from "~/board/const";
 
@@ -110,6 +111,20 @@ export const GameBoard: React.FC = () => {
                     <div className="text-3xl font-bold">Game Over</div>
                     <div className="text-3xl font-bold">
                         {gameOverResultGetter()}
+                    </div>
+                    <div className="flex flex-row gap-4 text-2xl">
+                        <button
+                            className="cursor-pointer rounded-3xl p-2 hover:bg-neutral-400 dark:hover:bg-neutral-700"
+                            onClick={() => window.location.reload()}
+                        >
+                            Local
+                        </button>
+                        <NavLink
+                            to="/"
+                            className="rounded-3xl p-2 hover:bg-neutral-400 dark:hover:bg-neutral-700"
+                        >
+                            Home
+                        </NavLink>
                     </div>
                 </div>
             )}
