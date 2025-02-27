@@ -92,7 +92,7 @@ export const GameBoard: React.FC = () => {
                             >
                                 <Board
                                     key={i}
-                                    cord={i}
+                                    boardCord={i}
                                     swapPlayer={swapPlayer}
                                     player0Flag={player0Flag}
                                     active={
