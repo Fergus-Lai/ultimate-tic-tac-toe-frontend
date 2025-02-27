@@ -117,7 +117,7 @@ export const GameBoard: React.FC = () => {
                             className="cursor-pointer rounded-3xl p-2 hover:bg-neutral-400 dark:hover:bg-neutral-700"
                             onClick={() => window.location.reload()}
                         >
-                            Local
+                            Another Game
                         </button>
                         <NavLink
                             to="/"
