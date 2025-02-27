@@ -2,11 +2,17 @@ import { NavLink } from "react-router";
 
 function Home() {
     return (
-        <div className="flex h-screen w-screen items-center justify-center gap-6">
-            <NavLink to="/Board" className="h-1/4 w-1/12">
+        <div className="flex h-screen w-screen items-center justify-center gap-6 text-neutral-800 dark:text-neutral-200">
+            <NavLink
+                to="/Board"
+                className="rounded-3xl p-2 hover:bg-neutral-400 dark:hover:bg-neutral-700"
+            >
                 Local
             </NavLink>
-            <NavLink to="/Board/Multiplayer/:pid" className="h-1/4 w-1/12">
+            <NavLink
+                to="/Board/Multiplayer/:pid"
+                className="rounded-3xl p-2 hover:bg-neutral-400 dark:hover:bg-neutral-700"
+            >
                 Multiplayer
             </NavLink>
         </div>
