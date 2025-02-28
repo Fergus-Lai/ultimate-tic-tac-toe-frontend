@@ -3,7 +3,8 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import Home from "./Home.tsx";
 import { BrowserRouter, Route, Routes } from "react-router";
-import { GameBoard } from "./GameBoard.tsx";
+import { GameBoard } from "./board/GameBoard.tsx";
+import { Local } from "~/Local.tsx";
 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
@@ -11,7 +12,7 @@ createRoot(document.getElementById("root")!).render(
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="Board">
-                    <Route index element={<GameBoard />} />
+                    <Route index element={<Local />} />
                     <Route path="Multiplayer" element={<GameBoard />} />
                 </Route>
             </Routes>
