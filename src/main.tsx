@@ -11,7 +11,7 @@ createRoot(document.getElementById("root")!).render(
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="Board">
+                <Route path="Game">
                     <Route index element={<Local />} />
                     <Route path="Multiplayer/:roomID" element={<GameBoard />} />
                 </Route>
