@@ -6,19 +6,22 @@ function Lobby() {
     const [roomID, setRoomID] = useState("");
     const navigate = useNavigate();
     return (
-        <div
-            className="flex h-screen w-screen items-center justify-center gap-6 bg-neutral-200 text-neutral-800 dark:bg-neutral-900 dark:text-neutral-200"
-            onClick={async () => {
-                const res = await fetch("http://localhost:3000/create-room", {
-                    method: "POST",
-                });
-                const createdRoomID = (await res.json()).roomId;
-                navigate(`/Board/Multiplayer/${createdRoomID}`);
-            }}
-        >
+        <div className="flex h-screen w-screen items-center justify-center gap-6 bg-neutral-200 text-neutral-800 dark:bg-neutral-900 dark:text-neutral-200">
             <ToastContainer />
             <div className="flex h-1/6 flex-row gap-2">
-                <button className="flex h-full items-center justify-center rounded-3xl bg-neutral-700 p-2 hover:bg-neutral-400 dark:hover:bg-neutral-500">
+                <button
+                    className="flex h-full items-center justify-center rounded-3xl bg-neutral-700 p-2 hover:bg-neutral-400 dark:hover:bg-neutral-500"
+                    onClick={async () => {
+                        const res = await fetch(
+                            "http://localhost:3000/create-room",
+                            {
+                                method: "POST",
+                            },
+                        );
+                        const createdRoomID = (await res.json()).roomId;
+                        navigate(`/Game/Multiplayer/${createdRoomID}`);
+                    }}
+                >
                     Create Game
                 </button>
                 <div className="flex flex-col justify-between gap-4">
@@ -32,7 +35,7 @@ function Lobby() {
                         maxLength={6}
                     />
                     <NavLink
-                        to={`/Board/Multiplayer/${roomID}`}
+                        to={`/Game/Multiplayer/${roomID}`}
                         className="flex flex-1/2 items-center justify-center rounded-3xl bg-neutral-700 p-2 hover:bg-neutral-400 dark:hover:bg-neutral-500"
                         aria-disabled={!!roomID.match("[A-Z0-9]{6}")}
                         onClick={(e) => {
