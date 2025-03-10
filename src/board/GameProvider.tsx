@@ -7,10 +7,17 @@ import {
 
 interface GameProviderProps {
     children: ReactNode;
+    roomID?: string;
 }
 
-export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
-    const [state, dispatch] = useReducer(gameBoardReducer, initialState);
+export const GameProvider: React.FC<GameProviderProps> = ({
+    roomID,
+    children,
+}) => {
+    const [state, dispatch] = useReducer(gameBoardReducer, {
+        ...initialState,
+        roomID,
+    });
     return (
         <GameContext.Provider value={{ state, dispatch }}>
             {children}

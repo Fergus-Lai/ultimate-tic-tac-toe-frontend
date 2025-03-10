@@ -34,6 +34,7 @@ export type GameBoardState = {
     currentPlayer: 0 | 1;
     activeBoard: null | number;
     globalWinner: 0 | 1 | 2 | null;
+    roomID?: string;
 };
 
 export const initialState: GameBoardState = {
@@ -66,18 +67,23 @@ export function gameBoardReducer(
 ): GameBoardState {
     switch (action.type) {
         case ActionType.MAKE_MOVE: {
-            const { boardIndex, cellIndex } = action.payload;
-            const newBoard = [...state.boardState];
-            newBoard[boardIndex].cells[cellIndex] = state.currentPlayer;
-            newBoard[boardIndex].winner = newBoard[boardIndex].checkState();
-            return {
-                ...state,
-                boardState: newBoard,
-                currentPlayer: state.currentPlayer == 0 ? 1 : 0,
-                activeBoard:
-                    newBoard[cellIndex].winner === null ? cellIndex : null,
-                globalWinner: checkGlobalWinner(newBoard),
-            };
+            if (state.roomID) {
+                console.log("Hi");
+                return { ...state };
+            } else {
+                const { boardIndex, cellIndex } = action.payload;
+                const newBoard = [...state.boardState];
+                newBoard[boardIndex].cells[cellIndex] = state.currentPlayer;
+                newBoard[boardIndex].winner = newBoard[boardIndex].checkState();
+                return {
+                    ...state,
+                    boardState: newBoard,
+                    currentPlayer: state.currentPlayer == 0 ? 1 : 0,
+                    activeBoard:
+                        newBoard[cellIndex].winner === null ? cellIndex : null,
+                    globalWinner: checkGlobalWinner(newBoard),
+                };
+            }
         }
         case ActionType.RESET_BOARD:
             return initialState;

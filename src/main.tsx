@@ -13,7 +13,7 @@ createRoot(document.getElementById("root")!).render(
                 <Route path="/" element={<Home />} />
                 <Route path="Board">
                     <Route index element={<Local />} />
-                    <Route path="Multiplayer" element={<GameBoard />} />
+                    <Route path="Multiplayer/:roomID" element={<GameBoard />} />
                 </Route>
             </Routes>
         </BrowserRouter>
