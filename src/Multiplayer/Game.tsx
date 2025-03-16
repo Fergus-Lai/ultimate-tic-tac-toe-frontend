@@ -23,8 +23,7 @@ export const Multiplayer: React.FC = () => {
         const onDisconnected = () => {
             setConnected(false);
             setTimeout(function () {
-                console.log("I");
-                window.location.replace("/Game/Lobby");
+                navigate("/Game/Lobby");
             }, 5000);
         };
 
