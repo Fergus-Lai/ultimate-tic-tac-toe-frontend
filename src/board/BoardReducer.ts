@@ -1,9 +1,10 @@
 import { createContext } from "react";
 import { WINNING_COMBINATIONS } from "./const";
+import { socket } from "~/socket";
 
 export type NulPlayer = null | 0 | 1;
 
-class Board {
+export class Board {
     cells: NulPlayer[] = Array(9).fill(null);
     winner: 0 | 1 | 2 | null = null;
 
@@ -67,11 +68,15 @@ export function gameBoardReducer(
 ): GameBoardState {
     switch (action.type) {
         case ActionType.MAKE_MOVE: {
+            const { boardIndex, cellIndex } = action.payload;
             if (state.roomID) {
-                console.log("Hi");
+                socket.emit("makeMove", {
+                    roomId: state.roomID,
+                    boardIndex: boardIndex,
+                    cellIndex: cellIndex,
+                });
                 return { ...state };
             } else {
-                const { boardIndex, cellIndex } = action.payload;
                 const newBoard = [...state.boardState];
                 newBoard[boardIndex].cells[cellIndex] = state.currentPlayer;
                 newBoard[boardIndex].winner = newBoard[boardIndex].checkState();
