@@ -8,6 +8,7 @@ import {
     initialState,
 } from "~/board/BoardReducer";
 import { socket } from "~/socket";
+import { setBoard } from "./Actions";
 
 interface GameProviderProps {
     children: ReactNode;
@@ -62,6 +63,12 @@ export const GameProvider: React.FC<GameProviderProps> = ({
         };
         const onGameStart = (data: SocketBoardUpdate) => {
             setGameStarted(true);
+            const dataCurrentPlayer = data.turn == socket.id ? 0 : 1;
+            setBoard(dispatch, {
+                turn: dataCurrentPlayer,
+                board: data.board,
+                activeBoard: null,
+            });
         };
         socket.on("connect", onConnected);
         socket.on("disconnect", onDisconnected);

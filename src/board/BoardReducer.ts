@@ -67,6 +67,15 @@ export function gameBoardReducer(
     action: IActions,
 ): GameBoardState {
     switch (action.type) {
+        case ActionType.SET_BOARD: {
+            const { turn, board, activeBoard } = action.payload;
+            return {
+                ...state,
+                currentPlayer: turn,
+                boardState: board,
+                activeBoard: activeBoard,
+            };
+        }
         case ActionType.MAKE_MOVE: {
             const { boardIndex, cellIndex } = action.payload;
             if (state.roomID) {
@@ -100,6 +109,7 @@ export function gameBoardReducer(
 export enum ActionType {
     MAKE_MOVE = "MAKE_MOVE",
     RESET_BOARD = "RESET_BOARD",
+    SET_BOARD = "SET_BOARD",
 }
 
 export type IActions =
@@ -107,6 +117,14 @@ export type IActions =
     | {
           type: ActionType.MAKE_MOVE;
           payload: { cellIndex: number; boardIndex: number };
+      }
+    | {
+          type: ActionType.SET_BOARD;
+          payload: {
+              turn: 0 | 1;
+              board: Board[];
+              activeBoard: number | null;
+          };
       };
 
 export type ActionsMap = {

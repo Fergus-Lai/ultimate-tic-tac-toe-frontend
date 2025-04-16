@@ -34,7 +34,12 @@ export const GameBoard: React.FC = () => {
             {state.globalWinner === null ? (
                 <>
                     <div className="min-h-fit text-center text-neutral-800 dark:text-neutral-200">
-                        Player {state.currentPlayer + 1}'s Turn
+                        {state.roomID
+                            ? state.currentPlayer == 0
+                                ? "Your "
+                                : "Opponent's "
+                            : `Player ${state.currentPlayer + 1}'s `}
+                        Turn
                     </div>
                     <div className="grid aspect-square max-h-full w-full max-w-screen-lg grid-cols-3 grid-rows-3 items-stretch justify-items-center px-8">
                         {[...Array(9)].map((_, i) => (

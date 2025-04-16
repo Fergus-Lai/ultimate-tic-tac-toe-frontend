@@ -1,5 +1,5 @@
 import { Dispatch } from "react";
-import { ActionType, IActions } from "~/board/BoardReducer";
+import { ActionType, Board, IActions } from "~/board/BoardReducer";
 
 export const makeMove = (
     dispatch: Dispatch<IActions>,
@@ -10,3 +10,8 @@ export const makeMove = (
 
 export const resetBoard = (dispatch: Dispatch<IActions>) =>
     dispatch({ type: ActionType.RESET_BOARD });
+
+export const setBoard = (
+    dispatch: Dispatch<IActions>,
+    payload: { turn: 0 | 1; board: Board[]; activeBoard: number | null },
+) => dispatch({ type: ActionType.SET_BOARD, payload });
