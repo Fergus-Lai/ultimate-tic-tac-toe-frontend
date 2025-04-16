@@ -75,7 +75,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({
                 activeBoard: null,
             });
         };
-        const updateBoard = (data: SocketBoardUpdate) => {
+        const onUpdateBoard = (data: SocketBoardUpdate) => {
             const dataCurrentPlayer = data.turn == socket.id ? 0 : 1;
             setBoard(dispatch, {
                 turn: dataCurrentPlayer,
@@ -93,7 +93,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({
         socket.on("connect", onConnected);
         socket.on("disconnect", onDisconnected);
         socket.on("gameStart", onGameStart);
-        socket.on("updateBoard", updateBoard);
+        socket.on("updateBoard", onUpdateBoard);
         socket.on("gameOver", onGameOver);
         socket.on("error", onError);
         socket.connect();
@@ -103,7 +103,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({
             socket.off("disconnect", onDisconnected);
             socket.off("error", onError);
             socket.off("gameStart", onGameStart);
-            socket.off("updateBoard", updateBoard);
+            socket.off("updateBoard", onUpdateBoard);
             socket.off("gameOver", onGameOver);
             socket.disconnect();
         };
