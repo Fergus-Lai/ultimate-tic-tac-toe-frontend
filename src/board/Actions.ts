@@ -1,5 +1,5 @@
 import { Dispatch } from "react";
-import { ActionType, Board, IActions } from "~/board/BoardReducer";
+import { ActionType, Board, IActions } from "~/Board/BoardReducer";
 
 export const makeMove = (
     dispatch: Dispatch<IActions>,

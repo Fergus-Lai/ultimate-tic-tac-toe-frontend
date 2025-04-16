@@ -6,7 +6,7 @@ import {
     gameBoardReducer,
     GameContext,
     initialState,
-} from "~/board/BoardReducer";
+} from "~/Board/BoardReducer";
 import { socket } from "~/socket";
 import { gameOver, setBoard } from "./Actions";
 import { Loader } from "~/Multiplayer/Loader";
