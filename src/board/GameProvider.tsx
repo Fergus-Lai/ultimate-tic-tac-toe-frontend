@@ -10,6 +10,7 @@ import {
 import { socket } from "~/socket";
 import { gameOver, setBoard } from "./Actions";
 import { Loader } from "~/Multiplayer/Loader";
+import { WaitingScreen } from "~/Multiplayer/WaitingScreen";
 
 interface GameProviderProps {
     children: ReactNode;
@@ -117,7 +118,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({
                 {roomID && !connected ? (
                     <Loader />
                 ) : roomID && !gameStarted ? (
-                    "Waiting for other player"
+                    <WaitingScreen />
                 ) : (
                     children
                 )}
