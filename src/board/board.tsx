@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { Square } from "~/board/Square";
-import { GameContext } from "~/board/BoardReducer";
+import { Square } from "./Square";
+import { GameContext } from "./BoardReducer";
 import { makeMove } from "./Actions";
 
 type BoardProps = {
