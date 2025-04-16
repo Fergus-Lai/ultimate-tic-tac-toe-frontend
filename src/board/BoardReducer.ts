@@ -99,6 +99,13 @@ export function gameBoardReducer(
                 };
             }
         }
+        case ActionType.GAME_OVER: {
+            const { winner } = action.payload;
+            return {
+                ...state,
+                globalWinner: winner,
+            };
+        }
         case ActionType.RESET_BOARD:
             return initialState;
         default:
@@ -110,6 +117,7 @@ export enum ActionType {
     MAKE_MOVE = "MAKE_MOVE",
     RESET_BOARD = "RESET_BOARD",
     SET_BOARD = "SET_BOARD",
+    GAME_OVER = "GAME_OVER",
 }
 
 export type IActions =
@@ -124,6 +132,12 @@ export type IActions =
               turn: 0 | 1;
               board: Board[];
               activeBoard: number | null;
+          };
+      }
+    | {
+          type: ActionType.GAME_OVER;
+          payload: {
+              winner: 0 | 1 | 2 | null;
           };
       };
 

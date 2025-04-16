@@ -15,3 +15,8 @@ export const setBoard = (
     dispatch: Dispatch<IActions>,
     payload: { turn: 0 | 1; board: Board[]; activeBoard: number | null },
 ) => dispatch({ type: ActionType.SET_BOARD, payload });
+
+export const gameOver = (
+    dispatch: Dispatch<IActions>,
+    payload: { winner: 0 | 1 | 2 | null },
+) => dispatch({ type: ActionType.GAME_OVER, payload });

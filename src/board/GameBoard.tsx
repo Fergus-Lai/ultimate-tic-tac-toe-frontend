@@ -10,9 +10,9 @@ export const GameBoard: React.FC = () => {
     const gameOverResultGetter = () => {
         switch (state.globalWinner) {
             case 0:
-                return "Player 1 Wins!";
+                return state.roomID ? "You Won" : "Player 1 Wins!";
             case 1:
-                return "Player 2 Wins!";
+                return state.roomID ? "You lost" : "Player 2 Wins!";
             case 2:
                 return "Draw";
         }

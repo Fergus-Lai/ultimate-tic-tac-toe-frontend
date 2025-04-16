@@ -8,7 +8,7 @@ import {
     initialState,
 } from "~/board/BoardReducer";
 import { socket } from "~/socket";
-import { setBoard } from "./Actions";
+import { gameOver, setBoard } from "./Actions";
 
 interface GameProviderProps {
     children: ReactNode;
@@ -23,6 +23,10 @@ interface SocketBoardUpdate {
     board: Board[];
     turn: string;
     activeBoard: number | null;
+}
+
+interface SocketGameOver {
+    winner: string;
 }
 
 export const GameProvider: React.FC<GameProviderProps> = ({
@@ -79,10 +83,18 @@ export const GameProvider: React.FC<GameProviderProps> = ({
                 activeBoard: data.activeBoard,
             });
         };
+        const onGameOver = (data: SocketGameOver) => {
+            const { winner } = data;
+            const gameWinner =
+                winner == "draw" ? 2 : socket.id == winner ? 0 : 1;
+            gameOver(dispatch, { winner: gameWinner });
+        };
+
         socket.on("connect", onConnected);
         socket.on("disconnect", onDisconnected);
         socket.on("gameStart", onGameStart);
         socket.on("updateBoard", updateBoard);
+        socket.on("gameOver", onGameOver);
         socket.on("error", onError);
         socket.connect();
         return () => {
@@ -92,6 +104,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({
             socket.off("error", onError);
             socket.off("gameStart", onGameStart);
             socket.off("updateBoard", updateBoard);
+            socket.off("gameOver", onGameOver);
             socket.disconnect();
         };
     }, [roomID, navigate]);
