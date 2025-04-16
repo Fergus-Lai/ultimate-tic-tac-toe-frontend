@@ -2,6 +2,7 @@ import { ReactNode, useEffect, useReducer, useState } from "react";
 import { useNavigate } from "react-router";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import {
+    Board,
     gameBoardReducer,
     GameContext,
     initialState,
@@ -17,6 +18,11 @@ interface SocketError {
     message: string;
 }
 
+interface SocketBoardUpdate {
+    board: Board[];
+    turn: string;
+}
+
 export const GameProvider: React.FC<GameProviderProps> = ({
     roomID,
     children,
@@ -26,6 +32,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({
         roomID,
     });
     const [connected, setConnected] = useState(socket.connected);
+    const [gameStarted, setGameStarted] = useState(false);
     const navigate = useNavigate();
     useEffect(() => {
         const onConnected = () => {
@@ -53,14 +60,20 @@ export const GameProvider: React.FC<GameProviderProps> = ({
             });
             socket.disconnect();
         };
+        const onGameStart = (data: SocketBoardUpdate) => {
+            setGameStarted(true);
+        };
         socket.on("connect", onConnected);
         socket.on("disconnect", onDisconnected);
+        socket.on("gameStart", onGameStart);
         socket.on("error", onError);
         socket.connect();
         return () => {
+            setGameStarted(false);
             socket.off("connect", onConnected);
             socket.off("disconnect", onDisconnected);
             socket.off("error", onError);
+            socket.off("gameStart", onGameStart);
             socket.disconnect();
         };
     }, [roomID, navigate]);
@@ -69,7 +82,11 @@ export const GameProvider: React.FC<GameProviderProps> = ({
         <>
             <ToastContainer />
             <GameContext.Provider value={{ state, dispatch }}>
-                {!roomID || connected ? children : "Connecting"}
+                {roomID && !connected
+                    ? "Connecting"
+                    : roomID && !gameStarted
+                      ? "Waiting for other player"
+                      : children}
             </GameContext.Provider>
         </>
     );
