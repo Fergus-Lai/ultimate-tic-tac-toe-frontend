@@ -22,6 +22,7 @@ interface SocketError {
 interface SocketBoardUpdate {
     board: Board[];
     turn: string;
+    activeBoard: number | null;
 }
 
 export const GameProvider: React.FC<GameProviderProps> = ({
@@ -70,9 +71,18 @@ export const GameProvider: React.FC<GameProviderProps> = ({
                 activeBoard: null,
             });
         };
+        const updateBoard = (data: SocketBoardUpdate) => {
+            const dataCurrentPlayer = data.turn == socket.id ? 0 : 1;
+            setBoard(dispatch, {
+                turn: dataCurrentPlayer,
+                board: data.board,
+                activeBoard: data.activeBoard,
+            });
+        };
         socket.on("connect", onConnected);
         socket.on("disconnect", onDisconnected);
         socket.on("gameStart", onGameStart);
+        socket.on("updateBoard", updateBoard);
         socket.on("error", onError);
         socket.connect();
         return () => {
@@ -81,6 +91,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({
             socket.off("disconnect", onDisconnected);
             socket.off("error", onError);
             socket.off("gameStart", onGameStart);
+            socket.off("updateBoard", updateBoard);
             socket.disconnect();
         };
     }, [roomID, navigate]);
