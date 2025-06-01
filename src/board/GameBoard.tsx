@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import { Board } from "./Board";
+import { Board } from "./MiniBoard";
 import { GameContext } from "./BoardReducer";
 import { useContext } from "react";
 import { resetBoard } from "./Actions";
