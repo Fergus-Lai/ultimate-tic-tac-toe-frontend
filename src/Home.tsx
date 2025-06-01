@@ -6,13 +6,13 @@ function Home() {
             <div className="text-4xl font-bold">Ultimate Tic Tac Toe</div>
             <NavLink
                 to="/Game"
-                className="flex w-1/4 items-center justify-center rounded-3xl bg-neutral-700 p-2 hover:bg-neutral-400 dark:hover:bg-neutral-500"
+                className="flex w-1/4 items-center justify-center rounded-3xl bg-neutral-700 p-2 text-neutral-200 hover:bg-neutral-400 dark:hover:bg-neutral-500"
             >
                 Local
             </NavLink>
             <NavLink
                 to="/Game/Lobby"
-                className="flex w-1/4 items-center justify-center rounded-3xl bg-neutral-700 p-2 hover:bg-neutral-400 dark:hover:bg-neutral-500"
+                className="flex w-1/4 items-center justify-center rounded-3xl bg-neutral-700 p-2 text-neutral-200 hover:bg-neutral-400 dark:hover:bg-neutral-500"
             >
                 Multiplayer
             </NavLink>

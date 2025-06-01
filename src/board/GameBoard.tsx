@@ -61,21 +61,21 @@ export const GameBoard: React.FC = () => {
                     </div>
                 </>
             ) : (
-                <div className="flex h-full flex-col items-center justify-center text-center text-neutral-800 dark:text-neutral-200">
+                <div className="flex h-full flex-col items-center justify-center gap-4 text-center text-neutral-800 dark:text-neutral-200">
                     <div className="text-3xl font-bold">Game Over</div>
                     <div className="text-3xl font-bold">
                         {gameOverResultGetter()}
                     </div>
                     <div className="flex flex-row gap-4 text-2xl">
                         <button
-                            className="cursor-pointer rounded-3xl p-2 hover:bg-neutral-400 dark:hover:bg-neutral-700"
+                            className="flex w-1/2 cursor-pointer items-center justify-center rounded-3xl bg-neutral-700 p-2 text-neutral-200 hover:bg-neutral-400 dark:hover:bg-neutral-500"
                             onClick={() => resetBoard(dispatch)}
                         >
                             Another Game
                         </button>
                         <NavLink
                             to="/"
-                            className="rounded-3xl p-2 hover:bg-neutral-400 dark:hover:bg-neutral-700"
+                            className="flex w-1/2 cursor-pointer items-center justify-center rounded-3xl bg-neutral-700 p-2 text-neutral-200 hover:bg-neutral-400 dark:hover:bg-neutral-500"
                         >
                             Home
                         </NavLink>
