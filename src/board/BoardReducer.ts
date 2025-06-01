@@ -38,14 +38,16 @@ export type GameBoardState = {
     roomID?: string;
 };
 
-export const initialState: GameBoardState = {
-    boardState: Array(9)
-        .fill(null)
-        .map(() => new Board()),
-    currentPlayer: 0,
-    activeBoard: null,
-    globalWinner: null,
-};
+export function getInitialState(): GameBoardState {
+    return {
+        boardState: Array(9)
+            .fill(null)
+            .map(() => new Board()),
+        currentPlayer: 0,
+        activeBoard: null,
+        globalWinner: null,
+    };
+}
 
 function checkGlobalWinner(gameBoard: Board[]) {
     const player0 = new Set();
@@ -107,7 +109,7 @@ export function gameBoardReducer(
             };
         }
         case ActionType.RESET_BOARD:
-            return initialState;
+            return getInitialState();
         default:
             return state;
     }
@@ -152,6 +154,6 @@ interface GameContextInterface {
 }
 
 export const GameContext = createContext<GameContextInterface>({
-    state: initialState,
+    state: getInitialState(),
     dispatch: () => {},
 });

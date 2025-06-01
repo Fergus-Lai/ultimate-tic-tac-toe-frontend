@@ -5,7 +5,7 @@ import {
     Board,
     gameBoardReducer,
     GameContext,
-    initialState,
+    getInitialState,
 } from "./BoardReducer";
 import { socket } from "../socket";
 import { gameOver, setBoard } from "./Actions";
@@ -36,7 +36,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({
     children,
 }) => {
     const [state, dispatch] = useReducer(gameBoardReducer, {
-        ...initialState,
+        ...getInitialState(),
         roomID,
     });
     const [connected, setConnected] = useState(socket.connected);
