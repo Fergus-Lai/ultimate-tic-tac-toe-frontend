@@ -88,7 +88,13 @@ export const GameProvider: React.FC<GameProviderProps> = ({
         const onGameOver = (data: SocketGameOver) => {
             const { winner } = data;
             const gameWinner =
-                winner == "draw" ? 2 : socket.id == winner ? 0 : 1;
+                winner == "Opponent Left"
+                    ? 3
+                    : winner == "draw"
+                      ? 2
+                      : socket.id == winner
+                        ? 0
+                        : 1;
             gameOver(dispatch, { winner: gameWinner });
         };
 

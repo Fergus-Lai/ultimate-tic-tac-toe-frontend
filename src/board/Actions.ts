@@ -18,5 +18,5 @@ export const setBoard = (
 
 export const gameOver = (
     dispatch: Dispatch<IActions>,
-    payload: { winner: 0 | 1 | 2 | null },
+    payload: { winner: 0 | 1 | 2 | 3 | null },
 ) => dispatch({ type: ActionType.GAME_OVER, payload });

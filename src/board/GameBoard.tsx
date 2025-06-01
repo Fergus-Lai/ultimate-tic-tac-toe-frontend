@@ -15,6 +15,8 @@ export const GameBoard: React.FC = () => {
                 return state.roomID ? "You lost" : "Player 2 Wins!";
             case 2:
                 return "Draw";
+            case 3:
+                return "Opponent Left";
         }
     };
 

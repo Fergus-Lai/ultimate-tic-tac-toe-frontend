@@ -34,7 +34,7 @@ export type GameBoardState = {
     boardState: Board[];
     currentPlayer: 0 | 1;
     activeBoard: null | number;
-    globalWinner: 0 | 1 | 2 | null;
+    globalWinner: 0 | 1 | 2 | 3 | null;
     roomID?: string;
 };
 
@@ -137,7 +137,7 @@ export type IActions =
     | {
           type: ActionType.GAME_OVER;
           payload: {
-              winner: 0 | 1 | 2 | null;
+              winner: 0 | 1 | 2 | 3 | null;
           };
       };
 
