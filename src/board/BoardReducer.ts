@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import { WINNING_COMBINATIONS } from "./const";
-import { socket } from "~/socket";
+import { socket } from "../socket";
 
 export type NulPlayer = null | 0 | 1;
 

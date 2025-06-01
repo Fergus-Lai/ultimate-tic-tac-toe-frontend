@@ -6,11 +6,11 @@ import {
     gameBoardReducer,
     GameContext,
     initialState,
-} from "~/board/BoardReducer";
-import { socket } from "~/socket";
+} from "./BoardReducer";
+import { socket } from "../socket";
 import { gameOver, setBoard } from "./Actions";
-import { Loader } from "~/multiplayer/Loader";
-import { WaitingScreen } from "~/multiplayer/WaitingScreen";
+import { Loader } from "../multiplayer/Loader";
+import { WaitingScreen } from "../multiplayer/WaitingScreen";
 
 interface GameProviderProps {
     children: ReactNode;
