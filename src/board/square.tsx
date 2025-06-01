@@ -1,6 +1,6 @@
 import o from "~/assets/o.svg";
 import x from "~/assets/x.svg";
-import { NulPlayer } from "~/Board/BoardReducer";
+import { NulPlayer } from "~/board/BoardReducer";
 
 type SquareProps = {
     squareState: NulPlayer;

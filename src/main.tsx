@@ -2,10 +2,10 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import Home from "./Home.tsx";
-import Lobby from "./Multiplayer/Lobby.tsx";
+import Lobby from "./multiplayer/Lobby.tsx";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { Local } from "./Local.tsx";
-import { Multiplayer } from "./Multiplayer/Game.tsx";
+import { Multiplayer } from "./multiplayer/Game.tsx";
 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>

@@ -1,5 +1,5 @@
-import { GameProvider } from "./Board/GameProvider";
-import { GameBoard } from "./Board/GameBoard";
+import { GameProvider } from "./board/GameProvider";
+import { GameBoard } from "./board/GameBoard";
 
 export const Local: React.FC = () => {
     return (
