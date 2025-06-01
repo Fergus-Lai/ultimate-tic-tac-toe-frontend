@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { Bounce, ToastContainer, toast } from "react-toastify";
+import { URL } from "../socket";
 
 function Lobby() {
     const [roomID, setRoomID] = useState("");
@@ -13,12 +14,9 @@ function Lobby() {
                     <button
                         className="flex h-full items-center justify-center rounded-3xl bg-neutral-700 p-2 hover:bg-neutral-400 dark:hover:bg-neutral-500"
                         onClick={async () => {
-                            const res = await fetch(
-                                "http://localhost:3000/create-room",
-                                {
-                                    method: "POST",
-                                },
-                            );
+                            const res = await fetch(`${URL}/create-room`, {
+                                method: "POST",
+                            });
                             const createdRoomID = (await res.json()).roomId;
                             navigate(`/Game/Multiplayer/${createdRoomID}`);
                         }}
