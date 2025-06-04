@@ -19,15 +19,34 @@ function Lobby() {
                     <button
                         className="flex h-full items-center justify-center rounded-3xl bg-neutral-700 p-2 hover:bg-neutral-400 dark:hover:bg-neutral-500"
                         onClick={async () => {
-                            toast.info("Creating Room", DEFAULT_TOAST_OPTION);
-                            const res = await fetch(
-                                `${SERVER_URL}/create-room`,
-                                {
-                                    method: "POST",
-                                },
+                            toast.info(
+                                "Creating Room (May take up to 2 minute)",
+                                DEFAULT_TOAST_OPTION,
                             );
-                            const createdRoomID = (await res.json()).roomId;
-                            navigate(`/Game/Multiplayer/${createdRoomID}`);
+                            try {
+                                const controller = new AbortController();
+                                const id = setTimeout(
+                                    () => controller.abort(),
+                                    120000,
+                                );
+
+                                const res = await fetch(
+                                    `${SERVER_URL}/create-room`,
+                                    {
+                                        method: "POST",
+                                        signal: controller.signal,
+                                    },
+                                );
+                                clearTimeout(id);
+                                const createdRoomID = (await res.json()).roomId;
+                                navigate(`/Game/Multiplayer/${createdRoomID}`);
+                            } catch (error) {
+                                console.log(error);
+                                toast.error(
+                                    "Unable to create room, please try again later",
+                                    DEFAULT_TOAST_OPTION,
+                                );
+                            }
                         }}
                     >
                         Create Game
