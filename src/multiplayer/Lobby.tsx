@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { Bounce, ToastContainer, toast } from "react-toastify";
-import { URL } from "../socket";
+import { SERVER_URL } from "../socket";
 
 function Lobby() {
+    useEffect(() => {
+        fetch(SERVER_URL + "/status");
+        return () => {};
+    }, []);
     const [roomID, setRoomID] = useState("");
     const navigate = useNavigate();
     return (
@@ -14,9 +18,12 @@ function Lobby() {
                     <button
                         className="flex h-full items-center justify-center rounded-3xl bg-neutral-700 p-2 hover:bg-neutral-400 dark:hover:bg-neutral-500"
                         onClick={async () => {
-                            const res = await fetch(`${URL}/create-room`, {
-                                method: "POST",
-                            });
+                            const res = await fetch(
+                                `${SERVER_URL}/create-room`,
+                                {
+                                    method: "POST",
+                                },
+                            );
                             const createdRoomID = (await res.json()).roomId;
                             navigate(`/Game/Multiplayer/${createdRoomID}`);
                         }}

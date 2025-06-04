@@ -1,6 +1,12 @@
+import { useEffect } from "react";
 import { NavLink } from "react-router";
+import { SERVER_URL } from "./socket";
 
 function Home() {
+    useEffect(() => {
+        fetch(SERVER_URL + "/status");
+        return () => {};
+    }, []);
     return (
         <div className="flex h-screen w-screen flex-col items-center justify-center gap-6 bg-neutral-200 text-neutral-800 dark:bg-neutral-900 dark:text-neutral-200">
             <div className="text-4xl font-bold">Ultimate Tic Tac Toe</div>
