@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShare } from "@fortawesome/free-solid-svg-icons";
-import { Bounce, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { DEFAULT_TOAST_OPTION } from "~/toastOption";
 
 export const WaitingScreen: React.FC = () => {

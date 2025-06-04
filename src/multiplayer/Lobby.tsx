@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
-import { Bounce, ToastContainer, toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { SERVER_URL } from "../socket";
 import { DEFAULT_TOAST_OPTION } from "~/toastOption";
 
