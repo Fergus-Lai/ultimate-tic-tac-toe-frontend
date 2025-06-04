@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import { SERVER_URL } from "../socket";
+import { DEFAULT_TOAST_OPTION } from "~/toastOption";
 
 function Lobby() {
     useEffect(() => {
@@ -18,6 +19,7 @@ function Lobby() {
                     <button
                         className="flex h-full items-center justify-center rounded-3xl bg-neutral-700 p-2 hover:bg-neutral-400 dark:hover:bg-neutral-500"
                         onClick={async () => {
+                            toast.info("Creating Room", DEFAULT_TOAST_OPTION);
                             const res = await fetch(
                                 `${SERVER_URL}/create-room`,
                                 {
@@ -47,16 +49,10 @@ function Lobby() {
                             onClick={(e) => {
                                 if (!roomID.match("[A-Z0-9]{6}")) {
                                     e.preventDefault();
-                                    toast.error("Incorrect Room ID", {
-                                        position: "top-right",
-                                        autoClose: 5000,
-                                        hideProgressBar: false,
-                                        closeOnClick: false,
-                                        pauseOnHover: true,
-                                        progress: undefined,
-                                        theme: "colored",
-                                        transition: Bounce,
-                                    });
+                                    toast.error(
+                                        "Incorrect Room ID",
+                                        DEFAULT_TOAST_OPTION,
+                                    );
                                 }
                             }}
                         >

@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useReducer, useState } from "react";
 import { useNavigate } from "react-router";
-import { Bounce, toast, ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import {
     Board,
     gameBoardReducer,
@@ -11,6 +11,7 @@ import { socket } from "../socket";
 import { gameOver, setBoard } from "./Actions";
 import { Loader } from "../multiplayer/Loader";
 import { WaitingScreen } from "../multiplayer/WaitingScreen";
+import { DEFAULT_TOAST_OPTION } from "~/toastOption";
 
 interface GameProviderProps {
     children: ReactNode;
@@ -56,16 +57,10 @@ export const GameProvider: React.FC<GameProviderProps> = ({
             }, 5000);
         };
         const onError = (data: SocketError) => {
-            toast.error(data.message + ", redirecting to lobby", {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: false,
-                pauseOnHover: true,
-                progress: undefined,
-                theme: "colored",
-                transition: Bounce,
-            });
+            toast.error(
+                data.message + ", redirecting to lobby",
+                DEFAULT_TOAST_OPTION,
+            );
             socket.disconnect();
         };
         const onGameStart = (data: SocketBoardUpdate) => {
